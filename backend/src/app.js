@@ -33,7 +33,7 @@ const publicRouter = new Router({ prefix: '/api' });
 
 // Connect endpoints to middleware
 publicRouter.post('/chats', chats.create);
-publicRouter.get('/chats', chats.list);
+publicRouter.get('/chats/:room(\\d+)*', chats.list);
 
 publicRouter.post('/events', events.create);
 publicRouter.get('/events', events.list);
