@@ -9,7 +9,7 @@ import './assets/stylesheets/style.css';
 const BACKEND_PORT = process.env.BACKEND_PORT;
 
 // replace baseUrl with a custom IP if backend runs on a different server, e.g. try pannu01: "95.216.207.125"
-const baseUrl = window.location.hostname;
+const baseUrl = "95.216.207.125";
 
 const backendUrl = `http://${baseUrl}:${BACKEND_PORT}`;
 
