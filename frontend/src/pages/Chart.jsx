@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Line } from 'react-chartjs-2';
 
-import './assets/stylesheets/style.css';
+import '../assets/stylesheets/style.css';
 
 // webpack hard-codes process.env.BACKEND_PORT in the build
 const BACKEND_PORT = process.env.BACKEND_PORT;
 
 // replace baseUrl with a custom IP if backend runs on a different server, e.g. try pannu01: "95.216.207.125"
-const baseUrl = "95.216.207.125";
+const baseUrl = "127.0.0.1";
 
 const backendUrl = `http://${baseUrl}:${BACKEND_PORT}`;
 
@@ -51,7 +51,7 @@ const getData = async () => {
   return data;
 }
 
-const App = () => {
+const Chart = () => {
   const [data, setData] = useState();
 
   // useEffect will be run only on the first render
@@ -75,7 +75,4 @@ const App = () => {
   );
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root'),
-);
+export default Chart;
