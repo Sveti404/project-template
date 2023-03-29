@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html> 
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Chatti huone</title>
+        <script defer src="script.js"></script>
+    </head>
+
+    <body background="tausta.jpg">
+
+        <h1>Super Secret Chat</h1>
+
+        <div id="error"></div>
+
+        <form id="form">
+
+
+            <div id="nimitys">           
+                <h2>Input a name</h2>
+                <label for="name"></label>
+                <input id="name" name="name" type="text">
+                <h1 id="message"></h1>
+                <button type="submit" onClick="myFunction()">
+                    Submit
+
+                </button>
+            </div>
+           
+            
+           
+
+            <script>
+                
+                    function myFunction() {
+
+                        let name = document.querySelector("#name");
+                        let message = document.querySelector("#message");
+
+                        message.innerHTML = "Welcome to the chat " + name.value;
+
+                        }
+                
+
+            </script>
+        </form>
+        <div id="message-container"></div>
+            <div id="makkara">  
+                
+                <form id="send-container">
+                    <input type="text" id="message-input">
+                    <button type="submit" id="send-button">Send</button>
+            </div>        
+
+        <style>
+        
+            #message-container {
+                position: absolute;
+                background-color: rgb(37, 41, 41);
+                
+            }
+        
+            #nimitys {
+
+                padding-bottom: 750px;
+                opacity: 0.8;
+            }    
+
+            form {
+                position: absolute;
+                color: rgb(0, 0, 0);
+                left: -8px;
+                padding-right: 20px ;
+                padding-left: 20px ;
+                border-top: 5px  #000;
+                border-right: 5px  #000;
+                opacity: .8;
+                background-color: #313749;
+                
+                
+            }
+
+            #message {
+            
+                position: absolute;
+                text-align: center;
+                left: 900px;
+                top: 5px;
+               
+                color: #000;
+            }
+
+            #makkara {
+
+                border-radius:50px ;
+            }
+            
+            #send-container {
+                
+                position: absolute;
+                text-align: center;
+                top: 80px;
+                left: 550px;
+                background:  #313749;
+                padding-left:300px;
+                padding-right: 300px;
+                border-radius: 3px;
+                width: 250px;
+                padding-top: 840px;
+                
+                font-size: 20px;
+                
+                border-right: 5px #000;
+                border-left: 5px #000;
+                
+            }
+
+            body {
+                position: absolute;
+                background-repeat:no-repeat;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                
+                
+            }
+        </style>
+
+       
+       
+        
+
+    </body>
+</html>
