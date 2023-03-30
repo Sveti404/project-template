@@ -8,7 +8,7 @@ function Sidebar_item({ itemClicked, roomID }) {
 function MessageList({ elements }) {
     return <div className='message_list'>{elements}</div>
 }
-setInterval(GetMessages(room), 5000);
+//setInterval(GetMessages(room), 5000);
 
 const Chat = () => {
     const [messages, setMessages] = React.useState([]);
