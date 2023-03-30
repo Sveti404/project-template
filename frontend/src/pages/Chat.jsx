@@ -44,7 +44,7 @@ const Chat = () => {
         }
     }
     
-    setInterval(GetMessages(room), 5000);
+    setInterval(GetMessages(room), 10000);
 
     function GetAllRooms() {
         axios.get('http://95.216.143.26:9000/api/chats').then(response => {
@@ -57,7 +57,7 @@ const Chat = () => {
     }
 
     function PostMessage() {
-        if (message !== "" && typeof room !== 'number' && room > 0) {
+        if (message !== "" && typeof room !== 'number' && room > 0 && message.length <= 140) {
             axios.post('http://95.216.143.26:9000/api/chats', {
                 nickname: nickname,
                 room: room,
