@@ -8,6 +8,7 @@ function Sidebar_item({ itemClicked, roomID }) {
 function MessageList({ elements }) {
     return <div className='message_list'>{elements}</div>
 }
+setInterval(GetMessages(room), 5000);
 
 const Chat = () => {
     const [messages, setMessages] = React.useState([]);
@@ -43,8 +44,6 @@ const Chat = () => {
 
         }
     }
-    
-    setInterval(GetMessages(room), 10000);
 
     function GetAllRooms() {
         axios.get('http://95.216.143.26:9000/api/chats').then(response => {
