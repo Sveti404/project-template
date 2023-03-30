@@ -44,6 +44,12 @@ html, body {
   display: inline;
 }
 
+#roomID {
+  display: inline;
+  width: 30px;
+  margin-right: 5px;
+}
+
 #messageBox {
   display: inline;
   padding: 5px;
@@ -60,6 +66,17 @@ html, body {
   width: 85%;
   height: 80%;
   border: 5px solid black;
+}
+.message {
+  margin: 5px;
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 5px;
+}
+
+#nickname {
+  margin-top: 5px;
+  border-radius: 5px;
 }
 
 #sendMessage {

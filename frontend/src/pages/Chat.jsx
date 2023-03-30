@@ -1,10 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
-function Click(roomID) {
-
-  
-}
   
 function Sidebar_item({ itemClicked, roomID }) {
     return <div className='sidebar_item' onClick={itemClicked}>{roomID}</div>;
@@ -12,32 +7,85 @@ function Sidebar_item({ itemClicked, roomID }) {
 
 function MessageList({ elements }) {
     return <div className='message_list'>{elements}</div>
-}  
+}
 
 const Chat = () => {
-    const [selectedRoomId, setSelectedRoomId] = React.useState(-1);
+    const [messages, setMessages] = React.useState([]);
+    const [nickname, setNickname] = React.useState("Anonymous");
+    const [message, setMessage] = React.useState("");
+    const [room, setRoom] = React.useState(1);
+    const [rooms, setRooms] = React.useState([])
+
+    const onNicknameChange = (event) => {
+        setNickname(event.target.value);
+    }
+
+    const onMessageChange = (event) => {
+        setMessage(event.target.value);
+    }
+    
+    const onRoomChange = (event) => {
+        setRoom(event.target.value);
+    }
+
     function GetMessages(roomID) {
         if (roomID > -1) {
-  
+            axios.get('http://127.0.0.1:9000/api/chats/'+roomID).then(response => {
+                var list = response.data.results.map(res => <div className='message'>{res.message} - {res.nickname} - {res.room}</div>);
+                setMessages(list);
+            });    
         } else {
-            axios.get('http://localhost:9000/api/chats').then(function (response) {
-                var result = [];
-                for (var i = 0; i < response.data.results.length; i++) {
-                    result.push(<div>{response.data.results[i]}</div>);
-                }
-                return result;
-            })
+            axios.get('http://127.0.0.1:9000/api/chats').then(response => {
+                var list = response.data.results.map(res => <div className='message'>{res.message} - {res.nickname} - {res.room}</div>);
+                setMessages(list);
+            });
+
+
         }
     }
+
+    function GetAllRooms() {
+        axios.get('http://127.0.0.1:9000/api/chats').then(response => {
+            var res = [];
+            for (var i = 0; i < response.data.results.length; i++) {
+                res.push(response.data.results[i].room);
+            }
+            setRooms(res);
+        });
+    }
+
+    function PostMessage() {
+        if (message !== "") {
+            axios.post('http://127.0.0.1:9000/api/chats', {
+                nickname: nickname,
+                room: room,
+                message: message
+            });
+            setMessage("");
+        }
+    }
+
+    function RoomList({}) {
+        GetAllRooms();
+        var res = [];
+        for (var i = 0; i < rooms.length; i++) {
+            res.push(<Sidebar_item itemClicked={() => GetMessages(rooms[i])} roomID={rooms[i]}/>);
+        }
+        return res;
+    }
+
     return (
         <>
             <div id="sidebar">
-                <Sidebar_item itemClicked={() => setSelectedRoomId(-1)} roomID={"main"}/>
+                <input id='nickname' placeholder={"nickname"} onChange={onNicknameChange}></input>
+                <Sidebar_item itemClicked={() => GetMessages(-1)} roomID={"main"}/>
+                
             </div>
-            <MessageList elements={GetMessages(selectedRoomId)}/>
+            <MessageList elements={messages}/>
             <div id="message-send-container">
-                <input id="messageBox"></input>
-                <button id="sendMessage">SEND</button>
+                <input id='roomID' defaultValue={1} onChange={onRoomChange}></input>
+                <input id="messageBox" value={message} onChange={onMessageChange}></input>
+                <button id="sendMessage" onClick={PostMessage}>SEND</button>
             </div>
         </>
 
