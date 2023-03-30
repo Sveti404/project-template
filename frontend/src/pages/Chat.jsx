@@ -30,12 +30,12 @@ const Chat = () => {
 
     function GetMessages(roomID) {
         if (roomID > -1) {
-            axios.get('http://127.0.0.1:9000/api/chats/'+roomID).then(response => {
+            axios.get('http://95.216.143.26:9000/api/chats/'+roomID).then(response => {
                 var list = response.data.results.map(res => <div className='message'>{res.message} - {res.nickname} - {res.room}</div>);
                 setMessages(list);
             });    
         } else {
-            axios.get('http://127.0.0.1:9000/api/chats').then(response => {
+            axios.get('http://95.216.143.26:9000/api/chats').then(response => {
                 var list = response.data.results.map(res => <div className='message'>{res.message} - {res.nickname} - {res.room}</div>);
                 setMessages(list);
             });
@@ -45,7 +45,7 @@ const Chat = () => {
     }
 
     function GetAllRooms() {
-        axios.get('http://127.0.0.1:9000/api/chats').then(response => {
+        axios.get('http://95.216.143.26:9000/api/chats').then(response => {
             var res = [];
             for (var i = 0; i < response.data.results.length; i++) {
                 res.push(response.data.results[i].room);
@@ -56,7 +56,7 @@ const Chat = () => {
 
     function PostMessage() {
         if (message !== "") {
-            axios.post('http://127.0.0.1:9000/api/chats', {
+            axios.post('http://95.216.143.26:9000/api/chats', {
                 nickname: nickname,
                 room: room,
                 message: message
